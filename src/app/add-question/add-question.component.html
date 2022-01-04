@@ -1,0 +1,126 @@
+<section id="add-question-modal">
+    <div class="row">
+        <div class="col-lg-12 col-12">
+            <div class="card">
+                <div class="card-body">
+                    <form class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+                        <div class="form-body">
+                            <h4 class="form-section">Add Question</h4>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Question</label>
+                                        <input type="text" class="form-control" formControlName="question" />
+                                        <div *ngIf="formSubmitted && addForm.question?.errors?.required"
+                                             class="help-block mt-1 text-danger"><i
+                                                class="ft-alert-circle align-middle"></i> Question is Required
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Type</label>
+                                        <select
+                                                [(ngModel)]="selectedQuestionType"
+                                                id="questionType" class="form-control"
+                                                formControlName="questionType"
+                                                (change)="onChangeQuestionType($event.target)"
+                                        >
+                                            <option *ngFor="let qType of questionTypes; let i = index"
+                                                    [value]="questionTypes[i].id">
+                                                {{questionTypes[i].name}}
+                                            </option>
+                                        </select>
+                                        <small id="passwordHelp" class="text-danger"
+                                               *ngIf="addForm.questionType.errors?.required && formSubmitted">
+                                            Question Type is required.
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div formArrayName="options"
+                                         *ngIf="addForm.questionType.value == 2">
+                                        <div *ngFor="let option of options.controls; let i=index">
+
+                                            <div [formGroupName]="i">
+                                                <div class="form-row">
+                                                    <div class="form-group col-md-9">
+                                                        <input
+                                                                type="text"
+                                                                class="form-control"
+                                                                formControlName="option"
+                                                                placeholder="Add Answer option"
+                                                        >
+                                                        <small class="text-danger"
+                                                               *ngIf="options.controls[i].get('option')?.errors?.required && formSubmitted">
+                                                            Answer option is required.
+                                                        </small>
+                                                    </div>
+                                                    <div class="form-group col-md-3"
+                                                         *ngIf="addForm.questionType.value === 2">
+                                                        <label class="inline-input-container">
+                                                            <input type="checkbox" formControlName="valid"
+                                                                   [checked]="options.controls[i].get('valid')?.value">
+                                                            <span class="checkmark"></span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <button type="button" class="btn btn-sm" (click)="addOption()"
+                                            *ngIf="addForm.questionType.value === 2">
+                                        Add Option
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="form-row mt-3" *ngIf="addForm.questionType.value == 1">
+                                <div class="form-group col-md-12">
+      <textarea
+              rows="10" cols="100" class="form-control" formControlName="paragraph">
+      </textarea>
+                                    <small class="text-danger"
+                                           *ngIf="addForm.paragraph.errors?.required && formSubmitted">
+                                        Paragraph is required.
+                                    </small>
+                                </div>
+                            </div>
+
+                            <div class="form-row mt-3">
+                                <div class="form-group col-md-12"
+                                     *ngIf="addForm.questionType.value == 2">
+                                    <label class="form-input-container">
+                                        <input type="checkbox" formControlName="other">Include ‘Other’ option
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label class="form-input-container">
+                                        <input type="checkbox" formControlName="isRequired"> This question is required
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-outline-primary">Submit</button>
+                            <br/>
+                            <br/>
+                            <button type="button" class="btn btn-outline-primary" (click)="goToPreview()">Preview my
+                                answers >
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
