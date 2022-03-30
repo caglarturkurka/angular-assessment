@@ -1,6 +1,10 @@
 export interface IQuestionType {
     id?: string;
     name?: string;
+
+
+
+    
 }
 
 export class QuestionType implements IQuestionType {

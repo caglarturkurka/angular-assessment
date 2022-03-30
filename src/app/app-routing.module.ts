@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {QuestionComponent} from "./question/question.component";
 import {PreviewAnswerComponent} from "./preview-answer/preview-answer.component";
-/***** TEST 1**/
+/***** TEST 2 **/
 const routes: Routes = [
   {
     path: '',
