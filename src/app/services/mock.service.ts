@@ -20,16 +20,6 @@ export class MockService {
         this.updatedQuestions.next(updatedQuestions);
     }
 
-    updateQuestion(question: any, id: any) {
-        const index = this.questions.findIndex((x: any) => x.id == id);
-        const ques = this.questions[index];
-        const existingQuestion = {...ques};
-        const updatedExistingQuestion = {...existingQuestion, ...question}
-        this.questions[index] = updatedExistingQuestion;
-
-        this.updatedQuestions.next([...this.questions])
-    }
-
     genID(length: number) {
         let result = '';
         let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
