@@ -30,12 +30,6 @@ export class MockService {
         return result;
     }
 
-    getQuestion(id: any): any {
-        const index = this.questions.findIndex(x => x.id == id);
-        const question = this.questions[index];
-        return question;
-    }
-
     deleteQuestion(id: any) {
         const index = this.questions.findIndex(x => x.id == id);
         this.questions.splice(index, 1);
